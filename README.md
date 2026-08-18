@@ -55,7 +55,8 @@ Apk/
 ├── gradle/wrapper/          # Gradle 8.7 wrapper
 ├── gradlew / gradlew.bat
 ├── build.gradle & settings.gradle
-├── .github/workflows/build-apk.yml   # GitHub Actions: builds debug + release APK
+├── workflows/build-apk.yml          # GitHub Actions (see note) — copy to .github/workflows/
+├── .github/workflows/build-apk.yml  # (local preview, not pushed via API) — CI
 └── README.md
 ```
 
@@ -123,7 +124,9 @@ Push to `main` or `arena/*` or trigger manually:
    - `VyaparDesk-debug-apk` (installable immediately, allow “unknown sources”)
    - `VyaparDesk-release-apk` (unsigned — sign before Play Store)
 
-Workflow file: `.github/workflows/build-apk.yml` uses `setup-java@v4` (Temurin 17) + `setup-android@v3`.
+Workflow file: `workflows/build-apk.yml` (also duplicated at `.github/workflows/build-apk.yml` locally) uses `setup-java@v4` (Temurin 17) + `setup-android@v3`.
+
+> **Note for CI:** GitHub Apps can’t push to `.github/workflows/` via the API in this sandbox. The workflow is committed as `workflows/build-apk.yml` so you can push. To enable Actions, manually move it on GitHub: **Code → Add file → Create new file → `.github/workflows/build-apk.yml`** and paste contents of `workflows/build-apk.yml`, or run locally: `mkdir -p .github/workflows && cp workflows/build-apk.yml .github/workflows/` then push from a personal token.
 
 ### Android App Details
 
